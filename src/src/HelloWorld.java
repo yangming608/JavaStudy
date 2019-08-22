@@ -1,4 +1,4 @@
-/*
+package src;/*
  * 软件版权: 恒生电子股份有限公司
  */
 
@@ -27,9 +27,13 @@ public class HelloWorld {
     public static Map<String, String> test1(){
 //        Map<String, Object> map = new HashMap<String, Object>();
         Map<String, String> map = new HashMap<>();
-//        map.put("a", "123");
+        map.put("a", "123");
         map.put("b","456");
         return map;
+    }
+
+    public void test2(){
+        System.out.println("test2");
     }
 }
 

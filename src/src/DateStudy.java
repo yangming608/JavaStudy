@@ -1,3 +1,4 @@
+package src;
 /*
  * 软件版权: 恒生电子股份有限公司
  */
@@ -24,7 +25,7 @@ public class DateStudy {
         /**
          *  @author: yangming
          *  @Date: 2019/8/6 9:12
-         *  @Description: 获取今天的日期字符串
+         *  @Description:获取今天的日期字符串
          */
         Date dNow = new Date( );
         SimpleDateFormat ft = new SimpleDateFormat("yyyyMMdd");
