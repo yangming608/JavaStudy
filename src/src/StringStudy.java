@@ -4,6 +4,7 @@ package src;
  */
 
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 /**
  * 功能说明:
@@ -73,6 +74,17 @@ public class StringStudy {
 
         /* 字符串拼接*/
         System.out.println(String.join("---", strList));
+
+        /* Java的String和char在内存中总是以Unicode编码表示。*/
+
+        /* StringJoiner和String.join对比使用, StringJoiner可以方便指定前缀和后缀*/
+        String[] names = {"Bob", "Alice", "Grace"};
+        System.out.println("Hello " + String.join(",", names) + "!");
+        StringJoiner sj = new StringJoiner(",","Hello ", "!");
+        for (String name:names){
+            sj.add(name);
+        }
+        System.out.println(sj.toString());
     }
 
 

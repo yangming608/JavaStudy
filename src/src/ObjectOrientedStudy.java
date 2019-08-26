@@ -38,7 +38,7 @@ public class ObjectOrientedStudy {
 
 class Person{
     String name;
-    int age = 15;               /* 这里的age是实例变量，没有加static的修饰就不是类变量*/
+    private int age = 15;               /* 这里的age是实例变量，没有加static的修饰就不是类变量*/
 
 /*    在Java中，创建对象实例的时候，按照如下顺序进行初始化：
     先初始化字段，例如，int age = 15;表示字段初始化为10，double salary;表示字段默认初始化为0，String name;表示引用类型字段默认初始化为null；
@@ -52,7 +52,7 @@ class Person{
      Person(){
     }
 
-     String getName() {
+     private String getName() {
         return this.name;
     }
 
