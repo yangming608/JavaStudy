@@ -3,7 +3,14 @@ package src;
  * 软件版权: 恒生电子股份有限公司
  */
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringJoiner;
 
 /**
@@ -12,7 +19,7 @@ import java.util.StringJoiner;
  * @author yangming28071
  */
 public class StringStudy {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         /*Java字符串的一个重要特点就是字符串不可变。这种不可变性是通过内部的private final char[]字段，以及没有任何修改char[]的方法实现的。*/
 
         /*当我们想要比较两个字符串是否相同时，要特别注意，我们实际上是想比较字符串的内容是否相同。必须使用equals()方法而不能用==。
@@ -85,6 +92,11 @@ public class StringStudy {
             sj.add(name);
         }
         System.out.println(sj.toString());
+
+        System.out.println(getQuotedStrs("123,456,789"));
+
+        StringStudy sss = new StringStudy();
+        sss.readLines("");
     }
 
 
@@ -99,6 +111,58 @@ public class StringStudy {
             index = str.indexOf(strChild,index + 1);
         }
         return n;
+    }
+
+    static String getQuotedStrs(String ss) {
+        /*  "1,2,3" -> "'1','2','3'"  */
+        StringBuilder sb = new StringBuilder();
+        String[] parse = ss.split(",");
+        for (String s : parse) {
+            sb.append("'").append(s).append("'").append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
+
+
+    void readLines(String ss) throws IOException {
+        ss =
+                "2019-09-17 15:51:13.643 [job-0] INFO  JobContainer - \n" +
+                "任务启动时刻                    : 2019-09-17 15:51:02\n" +
+                "任务结束时刻                    : 2019-09-17 15:51:13\n" +
+                "任务总计耗时                    :                 10s\n" +
+                "任务平均流量                    :              391B/s\n" +
+                "记录写入速度                    :              3rec/s\n" +
+                "读出记录总数                    :                  37\n" +
+                "读写失败总数                    :                   0\n" +
+                "\n" +
+                "2019-09-17 15:51:13.667  INFO 18345 --- [           main] c.h.rdc.bdata.datago.base.TaskDataX      : ------------------------  Script - After Task   ------------------------\n" +
+                "2019-09-17 15:51:13.668  INFO 18345 --- [       Thread-2] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@24fcf36f: startup date [Tue Sep 17 15:50:44 CST 2019]; root of context hierarchy\n" +
+                "2019-09-17 15:51:13.670  INFO 18345 --- [       Thread-2] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown\n";
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(ss.getBytes(Charset.forName("utf8"))), Charset.forName("utf8")));
+        String line;
+
+        Map<String, Object> dataXResultMap = new HashMap<>();
+
+        String[] key = {"任务启动时刻", "任务结束时刻", "任务总计耗时", "任务平均流量",
+                "记录写入速度", "读出记录总数", "读写失败总数"};
+
+        while ((line = br.readLine()) != null){
+            if (!line.trim().equals("")){
+                for (String item:key){
+                    if (line.contains(item)){
+                        String val = line.split(":")[1].trim();
+                        dataXResultMap.put(item, val);
+                    }
+                }
+            }
+        }
+
+        if ("0".equals(dataXResultMap.get("读写失败总数"))){
+            System.out.println("转换成功");
+        }
+
     }
 
 }

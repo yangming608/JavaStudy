@@ -26,6 +26,15 @@ Exception又分为两大类：
 Java规定：
     必须捕获的异常，包括Exception及其子类，但不包括RuntimeException及其子类，这种类型的异常称为Checked Exception。
     不需要捕获的异常，包括Error及其子类，RuntimeException及其子类。*/
+
+/*使用try ... catch ... finally时：
+多个catch语句的匹配顺序非常重要，子类必须放在前面；
+finally语句保证了有无异常都会执行，它是可选的；
+一个catch语句也可以匹配多个非继承关系的异常。*/
+
+/*调用printStackTrace()可以打印异常的传播栈，对于调试非常有用；
+捕获异常并再次抛出新的异常时，应该持有原始异常信息；
+通常不要在finally中抛出异常。如果在finally中抛出异常，应该原始异常加入到原有异常中。调用方可通过Throwable.getSuppressed()获取所有添加的Suppressed Exception。*/
 public class ErrorStudy {
     public static void main(String[] args){
         try {
@@ -47,7 +56,5 @@ public class ErrorStudy {
         }
         return res;
     }
-
-
 }
 

@@ -8,6 +8,7 @@ package src;
  *
  * @author yangming28071
  */
+/* 常用的核心库的学习*/
 public class CommonClassStudy {
     public static void main(String[] args) {
         /* Math类的学习 */
